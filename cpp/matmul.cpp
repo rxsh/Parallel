@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -81,6 +82,15 @@ int main(int argc, char* argv[]) {
 
     if (argc > 1) {
         for (int i = 1; i < argc; i++) {
+            string arg = argv[i];
+            if ((arg == "--block" || arg == "-b") && i + 1 < argc) {
+                bloque = atoi(argv[++i]);
+                continue;
+            }
+            if (arg.rfind("--block=", 0) == 0) {
+                bloque = atoi(arg.substr(8).c_str());
+                continue;
+            }
             tamanos.push_back(atoi(argv[i]));
         }
     } else {

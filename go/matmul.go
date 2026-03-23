@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -87,7 +88,22 @@ func main() {
 
 	if len(os.Args) > 1 {
 		tamanos = nil
-		for _, arg := range os.Args[1:] {
+		for i := 1; i < len(os.Args); i++ {
+			arg := os.Args[i]
+			if (arg == "--block" || arg == "-b") && i+1 < len(os.Args) {
+				if b, err := strconv.Atoi(os.Args[i+1]); err == nil && b > 0 {
+					bloque = b
+				}
+				i++
+				continue
+			}
+			if strings.HasPrefix(arg, "--block=") {
+				val := strings.TrimPrefix(arg, "--block=")
+				if b, err := strconv.Atoi(val); err == nil && b > 0 {
+					bloque = b
+				}
+				continue
+			}
 			n, err := strconv.Atoi(arg)
 			if err == nil && n > 0 {
 				tamanos = append(tamanos, n)
