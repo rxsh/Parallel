@@ -35,9 +35,7 @@ int main(int argc, char* argv[]) {
 
     const auto marca_tiempo =
         chrono::high_resolution_clock::now().time_since_epoch().count();
-    mt19937_64 generador(
-        static_cast<unsigned long long>(marca_tiempo) +
-        static_cast<unsigned long long>(rank) * 0x9E3779B97F4A7C15ULL);
+    mt19937_64 generador(static_cast<unsigned long long>(marca_tiempo) + static_cast<unsigned long long>(rank) * 0x9E3779B97F4A7C15ULL);
     uniform_real_distribution<double> distribucion(-1.0, 1.0);
 
     long long en_circulo_local = 0;

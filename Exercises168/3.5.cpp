@@ -22,16 +22,6 @@ int main(int argc, char* argv[]) {
         cout << "Ingrese el orden n de la matriz cuadrada: ";
         cin >> orden;
 
-        if (!cin || orden <= 0) {
-            cerr << "Entrada invalida. n debe ser un entero positivo.\n";
-            MPI_Abort(MPI_COMM_WORLD, 1);
-        }
-
-        if (orden % comm != 0) {
-            cerr << "n debe ser divisible entre el numero de procesos.\n";
-            MPI_Abort(MPI_COMM_WORLD, 1);
-        }
-
         matriz.resize(static_cast<size_t>(orden) * static_cast<size_t>(orden));
         vector_entrada.resize(orden);
 
